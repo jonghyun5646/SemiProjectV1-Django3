@@ -1,0 +1,38 @@
+header h1 {
+    margin-bottom: 25px;
+}
+
+#main {
+    height: auto;
+    min-height: 500px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+#menu li {
+    display: inline-block;
+    margin-left: 150px;
+}
+
+a { font-weight: bold }
+a:link { text-decoration: none; color: black }
+a:visited { text-decoration: none; color: black }
+a:hover { text-decoration: underline; color: orange }
+a:active { text-decoration: underline; color: orange }
+
+#wrap {
+    width: 1250px;
+    margin: 0 auto;
+}
+
+footer span {
+    display: block;
+    text-align: center;
+}
+
+hr {
+    background: black;
+    height: 1px;
+}
