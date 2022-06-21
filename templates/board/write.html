@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Python 웹프로젝트 v1</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href='css/webproject.css'>
-    <style>
+{% extends 'layout/base.html' %}
+
+{% block title %} board/write {% endblock %}
+
+{% block style %}
         form {
             width: 60%;
             margin: 65px auto;
@@ -22,26 +19,11 @@
             vertical-align: top;
             margin-top: 5px;
         }
-    </style>
-</head>
-<body>
-<div id="wrap">
-    <header>
-        <h1>Python 웹프로젝트 v1</h1>
-        <nav>
-            <ul id="menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="join.html">회원가입</a></li>
-                <li><a href="login.html">로그인</a></li>
-                <li><a href="board.html">게시판</a></li>
-                <li><a href="myinfo.html">회원정보</a></li>
-            </ul>
-        </nav>
-        <hr>
-    </header>
-    <div id="main">
+{% endblock %}
+
+{% block content %}
         <h2>게시판 새글쓰기</h2>
-        <form name="boardfrm" method="post" action="board.do">
+        <form name="boardfrm" method="post">
             <div><label for="title">제 목</label>
                 <input type="text" name="title" id="title"></div>
 
@@ -54,13 +36,5 @@
             <div><label></label>
                 <button type="submit">입력완료</button>
                 <button type="reset">다시입력</button></div>
-
         </form>
-    </div>
-    <footer>
-        <hr>
-        <span>copyright &copy; 2014. 2017. siestageek. All Rights Reserved.</span>
-    </footer>
-</div>
-</body>
-</html>
+{% endblock %}

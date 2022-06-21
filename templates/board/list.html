@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Python 웹프로젝트 v1</title>
-    <link rel="stylesheet" href='/static/css/normalize.css'>
-    <link rel="stylesheet" href='/static/css/webproject.css'>
-    <style>
+{% extends 'layout/base.html' %}
+
+{% block title %} board/list {% endblock %}
+
+{% block style %}
         /* 페이지네이션 가운데 정렬 */
         #pgnav { text-align: center; margin-left: -100px }
 
@@ -33,24 +30,9 @@
 
         .btns { text-align: right; border-top: none;
             border-left: none; border-right: none; }
-    </style>
-</head>
-<body>
-<div id="wrap">
-    <header>
-        <h1>Python 웹프로젝트 v1</h1>
-        <nav>
-            <ul id="menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/join">회원가입</a></li>
-                <li><a href="/login">로그인</a></li>
-                <li><a href="/list">게시판</a></li>
-                <li><a href="/myinfo">회원정보</a></li>
-            </ul>
-        </nav>
-        <hr>
-    </header>
-    <div id="main">
+{% endblock %}
+
+{% block content %}
         <h2>게시판</h2>
         <table>
             <colgroup><!-- 테이블 컬럼너비 지정 -->
@@ -63,7 +45,7 @@
 
             <tr><td colspan="5" class="btns">
                 <button type="button"
-                        onclick="location.href='write.html'">
+                        onclick="location.href='/write'">
                     새글쓰기</button>
                 </td></tr>
             <tr>
@@ -73,7 +55,7 @@
             </tr>
             <tr>
                 <td>1</td>
-                <td><a href="view.html?bno=1">시간은 금이라구, 친구! 진짜라구, 친구! 정말이라구, 친구!</a></td>
+                <td><a href="/view?bno=1">시간은 금이라구, 친구! 진짜라구, 친구! 정말이라구, 친구!</a></td>
                 <td>zzyzzy</td>
                 <td>2022-05-27</td>
                 <td>756</td>
@@ -142,20 +124,4 @@
                 <td>756</td>
             </tr>
         </table>
-        <ul id="pgnav">
-            <li>이전</li>
-            <li class="cpage">1</li><li>2</li>
-            <li>3</li><li>4</li>
-            <li>5</li><li>6</li>
-            <li>7</li><li>8</li>
-            <li>9</li><li>10</li>
-            <li>다음</li>
-        </ul>
-    </div>
-    <footer>
-        <hr>
-        <span>copyright &copy; 2022. zzyzzy. all rights reserved.</span>
-    </footer>
-</div>
-</body>
-</html>
+{% endblock %}
