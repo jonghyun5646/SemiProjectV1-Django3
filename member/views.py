@@ -1,5 +1,6 @@
 from django.contrib.auth.hashers import make_password
-from django.shortcuts import render
+from django.contrib.auth.handlers.modwsgi import check_password
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
@@ -38,7 +39,7 @@ def join(request):
             member.save()
 
             # 회원가입 성공시 joinok.html을 띄움
-            returnPage = 'memer/joinok.html'
+            returnPage = 'member/joinok.html'
 
         # 유효성 검사를 실패하는 경우 오류내용을 join.html에 표시하기 위해 dict 변수에 저장
         # 또한, 이미 입력했던 회원정보를 다시 join.html에 표시하기 위해 form이라는 dict 변수 생성
@@ -48,8 +49,44 @@ def join(request):
 
 
 def login(request):
-    return render(request, 'member/login.html')
+    returnPage = 'member/login.html'
+
+    if request.method == 'GET':
+        return render(request, returnPage)
+
+    elif request.method == 'POST':
+        form = request.POST.dict()
+
+        # 유효성 검사 1/2
+        error = ''
+        if not (form['userid'] and form['passwd']):
+            error = '아이디나 비밀번호가 입력되지 않았어요!'
+        else:
+            # 입력한 아이디로 회원정보가 테이블에 있는지 여부 확인
+            try:
+                member = Member.objects.get(userid=form['userid'])
+            except:
+                pass
+
+            if member and check_password(form['passwd'], member.passwd):
+
+                request.session['userid'] = form['userid']
+                return redirect('/')    # index 페이지로 이동
+            else:
+                error = '아이디나 비밀번호가 틀립니다!'
+
+        context = {'error': error}
+
+        return render(request, returnPage, context)
 
 
 def myinfo(request):
-    return render(request, 'member/myinfo.html')
+    member = {}
+
+    if request.session.get('userid'):
+        userid = request.session.get('userid')
+
+        member = Member.objects.get(userid=userid)
+
+    context = {'member': member}
+    return render(request, 'member/myinfo.html', context)
