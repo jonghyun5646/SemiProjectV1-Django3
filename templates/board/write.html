@@ -39,7 +39,7 @@
                 <button type="submit">입력완료</button>
                 <button type="reset">다시입력</button></div>
 
-        <input type="hidden" name="userid" value="abc123">
+        <input type="hidden" name="memberid" value="{{ requset.session.userid }}">
         </form>
 {% endblock %}
 
