@@ -7,9 +7,9 @@ from datetime import datetime
 
 
 class Board(models.Model):
-    id = models.AutoField(primary_key=True)
+    bno = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
-    userid = models.ForeignKey(Member, db_column='userid', on_delete=models.CASCADE, null=True, default='')
+    member = models.ForeignKey(Member, related_name='board', on_delete=models.CASCADE)
     regdate = models.DateTimeField(default=datetime.now)
     views = models.IntegerField(default=0)
     contents = models.TextField(null=False, blank=False)

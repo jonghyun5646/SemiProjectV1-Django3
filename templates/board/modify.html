@@ -27,26 +27,27 @@
             {% csrf_token %}
             {{ error }}
             <div><label for="title">제 목</label>
-                <input type="text" name="title" id="title"></div>
+                <input type="text" name="title" id="title" value="{{ bd.title }}"></div>
 
             <div><label for="userid">작성자</label>
-                <span id="userid">abc123</span></div>
+                <span id="userid">{{ bd.member.userid }}</span></div>
 
             <div><label for="contents" class="dragup">본 문</label>
-                <textarea name="contents" id="contents" rows="10" cols="50" style="resize: none"></textarea></div>
+                <textarea name="contents" id="contents" rows="10" cols="50" style="resize: none">{{ bd.contents }}</textarea></div>
 
             <div><label></label>
-                <button type="button" id="boardbtn">입력완료</button>
+                <button type="button" id="mdfbtn">수정완료</button>
                 <button type="reset">다시입력</button></div>
 
-        <input type="hidden" name="memberid" value="{{ requset.session.userid }}">
+            {# 수정할 게시글의 글번호를 hidden으로 설정 #}
+        <input type="hidden" name="bno" value="{{ bd.id }}">
         </form>
 {% endblock %}
 
 {% block jscript %}
     <script>
-        const boardbtn = document.querySelector('#boardbtn')
-        boardbtn.addEventListener('click', () => {
+        const mdfbtn = document.querySelector('#mdfbtn')
+        mdfbtn.addEventListener('click', () => {
            const title = document.boardfrm.title;
            const contents = document.boardfrm.contents;
            if (title.value == '') {
